@@ -1,4 +1,4 @@
-What the app should contain:
+## What the app should contain:
 
 1. Owner side
 
@@ -38,6 +38,18 @@ What the app should contain:
 5. Inventory management
 
 ----------------------------------------------
-Tech stack:
-To be deployed on a Linux VM 
-Python with flask and preferrably with mypy 
+## Tech stack:
+
+### General Requirements 
+
+ * To be deployed on a Linux VM 
+  
+ * Python with flask and preferrably with mypy 
+ 
+ * Documentation using Sphinx? 
+
+ * API docs using swagger 
+
+ * git-lint for linting 
+ 
+ * Add Github action for automatic linting check
