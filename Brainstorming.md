@@ -1,0 +1,28 @@
+What the app should contain:
+
+1.        Owner side
+    a. Items
+    b. Admin operations
+    i. Approve order
+    ii. Notify on ready
+    iii. Order history Edit items
+    c.  
+    d. Barcode scan
+    e. Inventory tracker \*\*
+2.        Customer side
+    a. Catalog
+    b. Shopping cart
+    i. Free text
+    c. Order
+    d. Payment methods
+    e. Order history
+    f. Reorder
+    g. Barcode scan
+    h.
+3.        Authentication & encryption
+    a. User management
+    b. Sign in via Facebook, Google
+4.        Notification system
+5.        Inventory management
+
+Tech stack:
