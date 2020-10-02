@@ -37,4 +37,7 @@ What the app should contain:
 
 5. Inventory management
 
+----------------------------------------------
 Tech stack:
+To be deployed on a Linux VM 
+Python with flask and preferrably with mypy 
