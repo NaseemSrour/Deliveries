@@ -1,0 +1,8 @@
+Installation on my Windows 10:
+(The following should be installed instead in Python's virtual env:
+cd to a directory to make a virtual env, and: python3 -m venv your-new-venv-name)
+
+Python 3.9
+Already have MySQL57 installed on my machine
+python3 -m pip install mysql-connector-python
+flask (latest - 1.1.2)
