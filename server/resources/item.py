@@ -27,7 +27,7 @@ class Item(Resource):
         """ Updates the Item with the provided ID """
         try:
             # TODO:  actual logic to be added once Database connector is available
-            return "Item Created", 201 
+            return "Item Created", 200 
         except Exception as err:
             return error_response(err)
 
@@ -35,6 +35,6 @@ class Item(Resource):
         """ Deletes the item with the provided ID """
         try:
             # TODO:  actual logic to be added once Database connector is available
-            return "Item Created", 201 
+            return "Item Created", 200 
         except Exception as err:
             return error_response(err)
