@@ -12,7 +12,7 @@ def hello_world():
     return 'Hello, World!'
 
 
-api.add_resource(Item, '/item', '/item/<string:item_id>', endpoint='item')
+api.add_resource(Item, '/items', '/items/<string:item_id>', endpoint='items')
 
 
 
