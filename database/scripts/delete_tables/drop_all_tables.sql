@@ -1,0 +1,5 @@
+DROP TABLE Business;
+DROP TABLE Item;
+DROP TABLE Users;
+DROP TABLE Orders;
+DROP TABLE order_item;
