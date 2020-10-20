@@ -1,7 +1,0 @@
-CREATE TABLE Business( business_id int NOT NULL AUTO_INCREMENT, business_name varchar(40) NOT NULL, logo mediumblob, tel varchar(10), isOpen bit, PRIMARY KEY(business_id) );
-CREATE TABLE Item( item_id int NOT NULL AUTO_INCREMENT, item_name varchar(25) NOT NULL, item_desc varchar(150), image mediumblob, price int NOT NULL, business_id int NOT NULL, PRIMARY KEY(item_id), FOREIGN KEY(business_id) REFERENCES Business(business_id) );
-CREATE TABLE Users(user_id int NOT NULL AUTO_INCREMENT, phone_number varchar(10) NOT NULL, user_name varchar(25), PRIMARY KEY(user_id) );
-CREATE TABLE Orders(order_id int NOT NULL AUTO_INCREMENT, user_id int NOT NULL, business_id int NOT NULL, totalPrice int, payment_method enum('cash', 'credit card'),orderDate DATETIME, orderEstTime TIME, isConfirmedForProcessing bit DEFAULT 0, isReady bit DEFAULT 0, isFulfilled bit DEFAULT 0, PRIMARY KEY(order_id), FOREIGN KEY(user_id) REFERENCES Users(user_id), FOREIGN KEY(business_id) REFERENCES Business(business_id) );
-CREATE TABLE order_item(item_id int NOT NULL, order_id int NOT NULL, item_note varchar(50), PRIMARY KEY(item_id, order_id), FOREIGN KEY(item_id) REFERENCES item(item_id), FOREIGN KEY(order_id) REFERENCES Orders(order_id) );
-CREATE INDEX preet ON order_item(order_id, item_id);
-CREATE INDEX nomretTlefon ON Users(phone_number);
