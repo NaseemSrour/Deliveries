@@ -1,2 +1,2 @@
-# Delivers
-Building a generic delivery services in Eilaboun
+# Deliveries
+Building a culture-specific (& generic) delivery services for our hometown.
