@@ -17,6 +17,6 @@ On Windows:<br>
 On Unix/MacOS: <br>
 > source your-venv-folder/bin/activate 
 
-Next, use the requirements file located in the repo, while the venv is activated:
+Next, use the requirements file located in the repo, while the venv is activated, and:
 
 python -m pip install -r requirements.txt
