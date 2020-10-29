@@ -5,7 +5,7 @@ Building a culture-specific (& generic) delivery services for our hometown.
 
 How to run on your local machine:<br>
 You need to create a virtual environment (venv) in your project directory, so instead of installing on your own machine,<br>install in a Python's virtual env, by
-first cd-ing to a directory and creating a virtual env:<br>
+first cd-ing to your project's directory and creating a virtual env:<br>
 
 > python -m venv your-new-venv-name.
 
