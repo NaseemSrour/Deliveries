@@ -20,7 +20,7 @@ On Unix/MacOS: <br>
 This'll create a directory in your project directory, with the name of your venv.<br>
 You'd probably want to ignore this folder within git, rather than <b>not</b> adding it everytime you use <i>git add .</i><br>
 This can be done by an <i>.gitignore</i> file, but then you'd need to commit this file, and maybe you don't want to share<br>
-this file with others, so instead instead of adding <i>.gitignore</i> to itself, it is better to just add the venv folder<br>
+this file with others, so instead of adding <i>.gitignore</i> to itself, it is better to just add the venv folder<br>
 to <b>.git/info/exclude</b>, in your root Git repository, hidden.
 
 Open it with your favourite text editor and append:
