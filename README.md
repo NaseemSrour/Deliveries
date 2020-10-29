@@ -4,7 +4,7 @@ Building a culture-specific (& generic) delivery services for our hometown.
 <h2>Quick Setup:</h2>
 
 How to run on your local machine:<br>
-You need to create a virtual environment in your project directory, so instead of installing on your own machine, install in a Python's virtual env, by
+You need to create a virtual environment (venv) in your project directory, so instead of installing on your own machine, install in a Python's virtual env, by
 cd-ing to a directory to make a virtual env, and:<br>
 
 > python3 -m venv your-new-venv-name.
@@ -17,6 +17,6 @@ On Windows:<br>
 On Unix/MacOS: <br>
 > source your-venv-folder/bin/activate 
 
-Next, use the requirements file located in the repo:
+Next, use the requirements file located in the repo, while the venv is activated:
 
 python -m pip install -r requirements.txt
