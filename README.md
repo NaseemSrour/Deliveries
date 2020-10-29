@@ -13,6 +13,7 @@ Activate the virtual environment by performing the following command inside your
 
 On Windows:<br>
 > your-venv-folder\Scripts\activate.bat <br><br>
+
 On Unix/MacOS: <br>
 > source your-venv-folder/bin/activate 
 
