@@ -1,4 +1,4 @@
-class Item:
+class DBItem:
     def __init__(self, itemID, itemName, itemDesc, img, price, business_id):
         self.ID = itemID  # int
         self.name = itemName  # string
