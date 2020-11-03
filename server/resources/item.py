@@ -1,11 +1,10 @@
 import sys
-sys.path.append('C:\\Users\\Naseem\\Desktop\\Deliveries\\')
-
 from flask import request
 from flask_restful import Resource, reqparse
 # from utils.errors import error_response
-from models.db_entities.db_item import DBItem
-from database import db_controller
+import models.db_entities.db_item
+import database.db_controller as db_controller
+
 
 class Item(Resource):
     def get(self, item_id=None):

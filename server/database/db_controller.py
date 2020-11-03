@@ -1,5 +1,6 @@
 import sys
-sys.path.append('C:\\Users\\Naseem\\Desktop\\Deliveries\\server\\database')
+import os
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import mysql.connector
 from mysql.connector import errorcode
 import json
