@@ -33,12 +33,12 @@ Open it with your favourite text editor and append:
 <h3>Install requirements:</h3>
 Next, use the requirements file located in the repo, while the venv is activated, and: <br>
 
-> python -m pip install -r requirements.txt
+>python -m pip install -r requirements.txt
 
 <br>
 <h3>Run the server:</h3>
 CD into the server folder, and run: <br>
 > server.py
-<br><br>
+
 When you're done working, you can deactivate the venv by simply running the following in the command prompt:
 > deactivate
