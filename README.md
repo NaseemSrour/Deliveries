@@ -11,6 +11,7 @@ In your command prompt:<br>
 > python -m venv your-new-venv-name.
 <br>
 <h3>Activate the venv:</h3>
+
 Activate the virtual environment by performing the following command inside your project directory:<br>
 
 On Windows:<br>
@@ -34,7 +35,7 @@ Next, use the requirements file located in the repo, while the venv is activated
 
 >python -m pip install -r requirements.txt
 
-<br><br>
+<br>
 <h3>Run the server:</h3>
 CD into the server folder, and run:<br>
 > server.py
