@@ -4,11 +4,13 @@ Building a culture-specific (& generic) delivery services for our hometown.
 <h2>Quick Setup:</h2>
 
 How to run on your local machine:<br>
+<h3>Create a virtual environment:</h3>
 You need to create a virtual environment (venv) in your project directory, so instead of installing on your own machine,<br>install in a Python's virtual env, by
 first cd-ing to your project's directory and creating a virtual env:<br>
 In your command prompt:<br>
 > python -m venv your-new-venv-name.
-
+<br>
+<h3>Activate the venv:</h3>
 Activate the virtual environment by performing the following command inside your project directory:<br>
 
 On Windows:<br>
@@ -27,10 +29,15 @@ Open it with your favourite text editor and append:
 > /you-venv-name
 
 <br>
+<h3>Install requirements:</h3>
 Next, use the requirements file located in the repo, while the venv is activated, and:
 
 >python -m pip install -r requirements.txt
 
+<br><br>
+<h3>Run the server:</h3>
+CD into the server folder, and run:<br>
+> server.py
 <br><br>
 When you're done working, you can deactivate the venv by simply running the following in the command prompt:
 > deactivate
