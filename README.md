@@ -7,7 +7,8 @@ How to run on your local machine:<br>
 <h3>Create a virtual environment:</h3>
 You need to create a virtual environment (venv) in your project directory, so instead of installing on your own machine,<br>install in a Python's virtual env, by
 first cd-ing to your project's directory and creating a virtual env:<br>
-In your command prompt:<br>
+In your command prompt:
+
 > python -m venv your-new-venv-name.
 
 This'll create a new directory in your project directory, with the name of your venv.<br>
