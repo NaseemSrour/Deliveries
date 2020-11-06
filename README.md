@@ -42,6 +42,7 @@ Next, use the requirements file located in the repo, while the venv is activated
 <br>
 <h3>Run the server:</h3>
 CD into the server folder, and run: <br>
+
 > server.py
 
 When you're done working, you can deactivate the venv by simply running the following in the command prompt:
