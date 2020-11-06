@@ -1,0 +1,1 @@
+INSERT INTO Business(business_name, business_owner_id, tel, isOpen) VALUES("6obs", 1, "678678678", True);
