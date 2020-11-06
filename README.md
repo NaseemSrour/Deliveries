@@ -9,6 +9,9 @@ You need to create a virtual environment (venv) in your project directory, so in
 first cd-ing to your project's directory and creating a virtual env:<br>
 In your command prompt:<br>
 > python -m venv your-new-venv-name.
+
+This'll create a new directory in your project directory, with the name of your venv.<br>
+This directory will store all the packages you install inside the virtual environment.
 <br>
 <h3>Activate the venv:</h3>
 
@@ -20,7 +23,7 @@ On Windows:<br>
 On Unix/MacOS: <br>
 > source your-venv-folder/bin/activate 
 
-This'll create a new directory in your project directory, with the name of your venv.<br>
+
 You will probably want to ignore this folder within git, rather than <b>not</b> adding it everytime you use <i>git add .</i><br>
 This can be done by a <i>.gitignore</i> file, but then you'd need to commit this file, and maybe you don't want to share<br>
 this file with others, so instead of adding <i>.gitignore</i> to itself, it is better to just add the venv folder<br>
