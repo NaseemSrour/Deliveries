@@ -6,6 +6,7 @@ from mysql.connector import errorcode
 import json
 import config
 
+# print(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 dbConfig = {
   'user': config.db_username,
@@ -14,16 +15,19 @@ dbConfig = {
   'database': config.db_name, 'autocommit':True
 }
 
-def execute_query(cursor, query, data=None):
+
+def execute_query(query, data=None):
+    db = mysql.connector.connect(**dbConfig)
+    cursor = db.cursor()
     try:
-        if(data is None):
-            cursor.execute(query)
-            print("query: " + query)
-            print("executed successfully")
-            return cursor
-        else:
-            cursor.execute(query, data)
-            return cursor
+        cursor.execute(query, data) # Data can be None in: execute(op, data=None)
+        print("query: " + query + " with data: " + str(data))
+        print("executed successfully!")
+        # fetchall() returns a list of tuples:
+        results = cursor.fetchall() # Results can be None
+        cursor.close()
+        db.close()
+        return results
         
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -32,33 +36,10 @@ def execute_query(cursor, query, data=None):
             print("Database does not exist!")
         else:
             print("Executing query " + query + " failed: {}".format(err))
+
+        if(cursor is not None):
+            cursor.close()
+        if(db is not None):
+            db.close()
+
         return None
-
-
-def get_item(item_id):
-    select_query = "SELECT item_name, item_desc, price, business_id FROM Item WHERE item_id=" + item_id + ";"
-    db = mysql.connector.connect(**dbConfig)
-    cursor = db.cursor()
-    cursor = execute_query(cursor, select_query)
-    row = cursor.fetchone()
-    if(row is not None):
-        cursor.close()
-        db.close()
-        # Suggestion: Use here the DBItem class to create an object and save the data (row) in it, and then return this object instead of returning 'row' as a tuple.
-        return row
-    else:
-        return("Item with ID " + item_id + " + is not found!")
-
-
-    
-def add_item(item):
-    item = json.loads(item)
-    insert_item_query = "INSERT INTO Item(item_name, item_desc, image, price, business_id) VALUES('{}', '{}', {}, '{}', '{}');".format(item["item_name"], item["item_desc"], "load_file('" + item["image_path"] + "')", item["price"], item["business_id"])
-    
-    db = mysql.connector.connect(**dbConfig)
-    cursor = db.cursor()
-    cursor = execute_query(cursor, insert_item_query)
-    cursor.close()
-    db.close()
-
-    return "Success"
