@@ -49,6 +49,10 @@ def get_item(item_id):
         return("Item with ID " + str(item_id) + " was not found!")
 
 
+
+def get_items(businessID):
+    pass
+
 def test():
     new_item = DBItem("Chicken Salad", "Healthy salad with chicken breast", None, 48, 1)
     print(new_item.name + "'s price is: " + str(new_item.price) + ", it contains: " + new_item.desc)
