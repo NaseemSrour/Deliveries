@@ -20,13 +20,16 @@ initial_db_config = {
 
 mydb = mysql.connector.connect(**initial_db_config)
 mycursor = mydb.cursor()
+isExist = False
 mycursor.execute("SHOW DATABASES")
 for x in mycursor:
     if x == config.db_name:
-      print("Database '" + config.db_name +"' already exists"
-    else:
-        print("Database '" + config.db_name +"' doesn't exit, creating it..")
-        mycursor.execute("CREATE DATABASE " + config.db_name)
+      print("Database '" + config.db_name +"' already exists")
+      isExist = True
+
+if (isExist == False):
+    print("Database '" + config.db_name +"' doesn't exit, creating it..")
+    mycursor.execute("CREATE DATABASE " + config.db_name)
 
 mycursor.close()
 mydb.close()
