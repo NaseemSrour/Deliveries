@@ -23,11 +23,15 @@ def execute_query(query, data=None):
         cursor.execute(query, data) # Data can be None in: execute(op, data=None)
         print("query: " + query + " with data: " + str(data))
         print("executed successfully!")
-        # fetchall() returns a list of tuples:
-        results = cursor.fetchall() # Results can be None
-        cursor.close()
-        db.close()
-        return results
+        if(query.startswith("SELECT") == True):
+            # fetchall() returns a list of tuples:
+            results = cursor.fetchall() # Results can be None
+            cursor.close()
+            db.close()
+            return results
+        else:
+            cursor.close()
+            db.close()
         
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -35,7 +39,7 @@ def execute_query(query, data=None):
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
             print("Database does not exist!")
         else:
-            print("Executing query " + query + " failed: {}".format(err))
+            print("db_controller: Executing query " + query + " failed: {}".format(err))
 
         if(cursor is not None):
             cursor.close()
