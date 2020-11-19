@@ -8,11 +8,11 @@ class DBItem:
         self.ID = itemID  # int - auto-generated inside the DB.
         self.name = itemName  # string
         self.desc = itemDesc  # string
-        self.img = img  # bytes
+        self.image = img  # bytes
         self.price = price  # int
         self.business_id = business_id  # int
 
-    ##### MISSING: BLOB handling (the 'image' coloumn)
+    ##### MISSING: BLOBs handling (the 'image' column)
     def add_item(self):
         insert_item_query = "INSERT INTO Item(item_name, item_desc, price, business_id) VALUES(%s, %s, %s, %s)"
         data = (self.name, self.desc, self.price, self.business_id)
@@ -20,16 +20,23 @@ class DBItem:
         result = db_controller.execute_query(insert_item_query, data)  # 'result' should be equal to None on success.
         print("Item " + self.name + " added successfully.")
 
+    ##### Missing: BLOBs handling (the 'image' column)
+    def update_item(self):
+        update_query = "UPDATE item SET item_name=%s, item_desc=%s, price=%s WHERE item_id=%s AND business_id=%s"
+        data = (self.name, self.desc, self.price, self.ID, self.business_id)
+        db_controller.execute_query(update_query, data)  # returns None
 
-    def update_item():
-        pass
-
+    def delete_item(self):
+        delete_statement = "DELETE FROM item WHERE item_id=%s AND business_id=%s"
+        data = (self.ID, self.business_id)
+        db_controller.execute_query(delete_statement, data)  # Returns None
+        
     
     def __str__(self):
         return str([self.ID, self.name, self.desc, self.price, self.business_id])
 
 
-##### Missing: Blobs handling
+##### Missing: BLOBs handling
 # Returns: DBItem instance, or None on failure.
 def get_item(item_id):
     if(type(item_id) != int):  # MAYBE WE ALSO PREVENT USER FROM INPUTING ANYTHING OTHER THAN A NUMBER (in the  web forms + in the HTTP requests).
@@ -76,6 +83,11 @@ def test():
     print(new_item.name + "'s price is: " + str(new_item.price) + ", it contains: " + new_item.desc)
     new_item.add_item()
 
-# call here these static functions to actually view/edit data in the DB.
+# call here these functions to actually view/edit data in the DB.
+
+'''
+aa = DBItem("aaa", "aa", None, 100, 1, 15)
+aa.delete_item()
+'''
 
 
