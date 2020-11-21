@@ -2,3 +2,4 @@ Run the scripts by this order (due to foreign keys constraints):
 
 1. Users
 2. Business
+3. item
