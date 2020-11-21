@@ -75,7 +75,7 @@ def get_items(businessID):
         return db_items_lst
     else:
         print("No items in business with ID " + str(businessID))
-        return None
+        return db_items_lst  # We can eliminate the if-else and just always return db_items_lst, but for now I want to keep the print statement when the above IF condition fails.
 
 
 def test():
