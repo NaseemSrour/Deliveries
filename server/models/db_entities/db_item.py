@@ -4,13 +4,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath
 import database.db_controller as db_controller
 
 class DBItem:
-    def __init__(self, itemName, itemDesc, img, price, business_id, itemID=None):
-        self.ID = itemID  # int - auto-generated inside the DB.
-        self.name = itemName  # string
-        self.desc = itemDesc  # string
-        self.image = img  # bytes
-        self.price = price  # int
-        self.business_id = business_id  # int
+    def __init__(self, itemName: str, itemDesc: str, img: bytes, price: int, business_id: int, itemID: int = None):
+        self.ID = itemID  # auto-generated inside the DB.
+        self.name = itemName
+        self.desc = itemDesc
+        self.image = img
+        self.price = price
+        self.business_id = business_id
 
     ##### MISSING: BLOBs handling (the 'image' column)
     def add_item(self):
@@ -38,7 +38,7 @@ class DBItem:
 
 ##### Missing: BLOBs handling
 # Returns: DBItem instance, or None on failure.
-def get_item(item_id):
+def get_item(item_id: int) -> DBItem:
     if(type(item_id) != int):  # MAYBE WE ALSO PREVENT USER FROM INPUTING ANYTHING OTHER THAN A NUMBER (in the  web forms + in the HTTP requests).
         return("item_id must be int!")
     
@@ -60,7 +60,7 @@ def get_item(item_id):
 
 ##### MISSING: BLOBs handling
 # Returns: list of DBItem instances, or None at failure.
-def get_items(businessID):
+def get_items(businessID: int) -> list[DBItem]:
     if(type(businessID) != int):
         return("business_id must be int!")
     select_query = "SELECT item_name, item_desc, price, business_id FROM item WHERE item.business_id=%s"
@@ -85,9 +85,12 @@ def test():
 
 # call here these functions to actually view/edit data in the DB.
 
-'''
-aa = DBItem("aaa", "aa", None, 100, 1, 15)
-aa.delete_item()
-'''
+
+aa = DBItem("aaa", "aa", None, 100, 1)
+#print(aa)
+my_items = get_items(1)
+for item in my_items:
+    print(item)
+
 
 
