@@ -16,7 +16,7 @@ dbConfig = {
 }
 
 
-def execute_query(query, data=None):
+def execute_query(query: str, data: tuple=None):
     db = mysql.connector.connect(**dbConfig)
     cursor = db.cursor()
     try:
