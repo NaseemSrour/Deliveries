@@ -85,12 +85,12 @@ def test():
 
 # call here these functions to actually view/edit data in the DB.
 
-
+'''
 aa = DBItem("aaa", "aa", None, 100, 1)
 #print(aa)
 my_items = get_items(1)
 for item in my_items:
     print(item)
-
+'''
 
 
