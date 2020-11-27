@@ -7,7 +7,6 @@ import db_controller
 
 from config import global_log_level
 
-
 logging.basicConfig(level=global_log_level)
 logger = logging.getLogger(__name__)
 
