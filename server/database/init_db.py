@@ -1,21 +1,30 @@
+import logging
+
 import mysql.connector
 from mysql.connector import errorcode
-import config
+import db_config
 import db_controller
 
+from config import global_log_level
+
+
+logging.basicConfig(level=global_log_level)
+logger = logging.getLogger(__name__)
+
+
 dbConfig = {
-  'user': config.db_username,
-  'password': config.db_password,
-  'host': config.db_host,
-  'database': config.db_name, 'autocommit':True
+  'user': db_config.db_username,
+  'password': db_config.db_password,
+  'host': db_config.db_host,
+  'database': db_config.db_name, 'autocommit':True
 }
 
 
 # Create DB if it doesn't exist
 initial_db_config = {
-  'user': config.db_username,
-  'password': config.db_password,
-  'host': config.db_host, 'autocommit':True
+  'user': db_config.db_username,
+  'password': db_config.db_password,
+  'host': db_config.db_host, 'autocommit':True
 }
 
 mydb = mysql.connector.connect(**initial_db_config)
@@ -23,13 +32,13 @@ mycursor = mydb.cursor()
 isExist = False
 mycursor.execute("SHOW DATABASES")
 for x in mycursor:
-    if x == config.db_name:
-      print("Database '" + config.db_name +"' already exists")
+    if x == db_config.db_name:
+      logger.info("Database '" + db_config.db_name +"' already exists")
       isExist = True
 
 if (isExist == False):
-    print("Database '" + config.db_name +"' doesn't exit, creating it..")
-    mycursor.execute("CREATE DATABASE " + config.db_name)
+    logger.info("Database '" + db_config.db_name +"' doesn't exit, creating it..")
+    mycursor.execute("CREATE DATABASE " + db_config.db_name)
 
 mycursor.close()
 mydb.close()
@@ -37,14 +46,14 @@ mydb.close()
 
 
 # Create tables
-print("Creating tables...")
+logger.info("Creating tables...")
 db = mysql.connector.connect(**dbConfig)
 cursor = db.cursor()
 
 
-for line in open(config.create_all_tables_path):
+for line in open(db_config.create_all_tables_path):
     cursor = db_controller.execute_query(cursor, query=line)
     
-print("Tables created succesfully!")
+logger.info("Tables created succesfully!")
 cursor.close()
 db.close()
