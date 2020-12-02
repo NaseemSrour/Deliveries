@@ -5,9 +5,6 @@ from flask_restful import Resource
 from utils.errors import error_response
 import database.db_controller as db_controller
 
-from config import global_log_level
-
-logging.basicConfig(level=global_log_level)
 logger = logging.getLogger(__name__)
 
 class Item(Resource):

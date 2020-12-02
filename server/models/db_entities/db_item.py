@@ -6,9 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath
 import logging
 
 import database.db_controller as db_controller
-from config import global_log_level
 
-logging.basicConfig(level=global_log_level)
 logger = logging.getLogger(__name__)
 
 class DBItem:
