@@ -1,18 +1,23 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
+import logging 
+
 import mysql.connector
 from mysql.connector import errorcode
 import json
-import config
+import db_config
+
+logger = logging.getLogger(__name__)
 
 # print(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 dbConfig = {
-  'user': config.db_username,
-  'password': config.db_password,
-  'host': config.db_host,
-  'database': config.db_name, 'autocommit':True
+  'user': db_config.db_username,
+  'password': db_config.db_password,
+  'host': db_config.db_host,
+  'database': db_config.db_name, 'autocommit':True
 }
 
 
@@ -21,8 +26,8 @@ def execute_query(query: str, data: tuple=None):
     cursor = db.cursor()
     try:
         cursor.execute(query, data) # Data can be None in: execute(op, data=None)
-        print("query: " + query + " with data: " + str(data))
-        print("executed successfully!")
+        logger.info("query: " + query + " with data: " + str(data))
+        logger.info("executed successfully!")
         if(query.startswith("SELECT") == True):
             # fetchall() returns a list of tuples:
             results = cursor.fetchall() # Results can be None
@@ -35,11 +40,11 @@ def execute_query(query: str, data: tuple=None):
         
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
+            logger.error("Something is wrong with your user name or password")
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist!")
+            logger.error("Database does not exist!")
         else:
-            print("db_controller: Executing query " + query + " failed: {}".format(err))
+            logger.error("db_controller: Executing query " + query + " failed: {}".format(err))
 
         if(cursor is not None):
             cursor.close()

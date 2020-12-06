@@ -1,3 +1,7 @@
+import logging 
+logger = logging.getLogger(__name__)
+
+
 def error_response(error: Exception or str, status=500, toConsole=True): 
     """creates a generic error response tuple with the error message and status 500 
 
@@ -10,5 +14,6 @@ def error_response(error: Exception or str, status=500, toConsole=True):
         tuple(dict(str,str), int): A tuple that looks like ({"error": <errorMsg}, <HttpStatusCode>)
     """
     if (toConsole):
+        logger.error(error)
         print(error)
     return {"error": str(error)}, status
