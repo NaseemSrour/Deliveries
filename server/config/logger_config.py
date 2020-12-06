@@ -110,7 +110,7 @@ DEFAULT_LOGGING = {
         '__main__': {  # if __name__ == '__main__'
             'handlers': ['default', 'main_file'],
             'level': 'DEBUG',
-            'propagate': False
+            'propagate': True
         },
         **get_module_loggers()
     } 
