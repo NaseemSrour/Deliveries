@@ -11,6 +11,8 @@ from flask.testing import FlaskClient
 import server   
 
 """
+Any pytest construct defined within the conftest.py file can be accessed by all testcases within and below this directory structure. 
+
 Fixtures are a pytest construct that can be used to encapsulate repeating functionality that can be shared across tests.
 
 You define a fixture, that usually returns/yields some sort of an object. 
