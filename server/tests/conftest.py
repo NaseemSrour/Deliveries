@@ -1,14 +1,18 @@
 import sys, os
 from pathlib import Path
-from typing import Generator
-from testing_utils import delete_all_testbenches
+
+# For some reason sys.path.insert(0, ../) to get the parent directory isnt working here, so had to go for the following:  
 parent_dir = Path((os.path.dirname(os.path.abspath(__file__)))).parent
 sys.path.insert(0, str(parent_dir)) 
+
+from typing import Generator
+
 
 import pytest
 from flask.testing import FlaskClient
 
-import server   
+import server
+
 
 """
 Any pytest construct defined within the conftest.py file can be accessed by all testcases within and below this directory structure. 
@@ -36,7 +40,7 @@ def client() -> Generator[FlaskClient, None, None]:
     server.create_app().config['TESTING'] = True
     with server.create_app().test_client() as client:
         yield client
-    
+
     # Any code added here is "teardown" code, which will be executed, once a test finishes execution.
         
     
