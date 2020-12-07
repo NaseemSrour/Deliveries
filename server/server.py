@@ -12,18 +12,8 @@ logger = logging.getLogger(__name__)
 logger.debug("Logger is configured!")
 
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-
-
-
-
-
 def create_app() -> Flask:
     app = Flask(__name__)
-
     api = Api(app)
     api.add_resource(Item, '/items', '/items/<string:item_id>', endpoint='items')
     return app 
@@ -34,7 +24,5 @@ if __name__ == '__main__':
     # Runs at localhost:5000 
     logger.info("Starting app...")
     app = create_app()
-    @app.route('/')
-    def hello_world():
-        return 'Hello, World!'
+
     app.run(debug=True)
