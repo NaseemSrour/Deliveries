@@ -1,0 +1,1 @@
+pytest > tests/last_test.log
