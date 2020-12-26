@@ -45,5 +45,12 @@ CD into the server folder, and run: <br>
 
 > server.py
 
+On Windows:
+Activate the virtual env, then export the FLASK_APP flag as:
+>set FLASK_APP=your_flask_server_file.py<br>
+
+And then run:
+>python -m flask run
+
 When you're done working, you can deactivate the venv by simply running the following in the command prompt:
 > deactivate
