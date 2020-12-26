@@ -3,7 +3,7 @@ import logging.config
 from flask import Flask
 from flask_restful import Resource, Api
 
-from resources.item import Item
+from resources.item_api import ItemAPI
 
 from config.logger_config import DEFAULT_LOGGING 
 
@@ -15,7 +15,7 @@ logger.debug("Logger is configured!")
 def create_app() -> Flask:
     app = Flask(__name__)
     api = Api(app)
-    api.add_resource(Item, '/items', '/items/<string:item_id>', endpoint='items')
+    api.add_resource(ItemAPI, '/item', '/item/<int:item_id>', endpoint='item_api')  # endpoint shkla esm l resource (file) in lowercase
     return app 
 
 if __name__ == '__main__':
