@@ -6,6 +6,7 @@ print(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 import logging 
 
 from flask_restful import Resource, reqparse
+from flask import request
 
 from utils.errors import error_response
 import database.db_controller as db_controller
@@ -19,11 +20,18 @@ def dictify_DBItem(my_item):
     item_dict["item_id"] = my_item.ID
     item_dict["item_name"] = my_item.name
     item_dict["item_desc"] = my_item.desc
-    # NEED TO FIGURE OUT HOW TO RETURN AN IMAGE. Cannot put bytes in a json (which is called 'serialization')
+    ###################### NEED TO FIGURE OUT HOW TO RETURN AN IMAGE. Cannot put bytes in a json (which is called 'serialization')
     # item_dict["image"] = my_item.image
     item_dict["price"] = my_item.price
     item_dict["business_id"] = my_item.business_id
     return item_dict
+
+def buildDBItemFromJson(jsoned_item):
+    ################################### MISSING: Handle images
+    if ('item_name' not in jsoned_item) or ('item_desc' not in jsoned_item) or ('price' not in jsoned_item) or ('business_id' not in jsoned_item):
+        return None
+    new_item = db_item.DBItem(jsoned_item['item_name'], jsoned_item['item_desc'], None, jsoned_item['price'], jsoned_item['business_id'])
+    return new_item
 
 class ItemAPI(Resource):
 
@@ -36,29 +44,53 @@ class ItemAPI(Resource):
     
     def get(self, item_id=None):
         """Retrives the item with the provided ID"""
+        # item_id is a variable in the URL path (slash).
+        # While request.args.get["item_name"] is the "query string" (argument) that is denoted in the URL after the question mark: http://127.0.0.1:5000/item/15/?item_name=Naseem&other_key=other_value
         try:
-            logger.info("Server's GET item request")
+            logger.info("Server's GET item " + str(item_id) + " requested")
             if (item_id is not None):
                 retrieved_item = db_item.get_item(item_id)
                 
                 if retrieved_item is None:
+                    # Item not found in DB, or DB is down:
                     return {"error": "Item with ID " + str(item_id) + " was not found!"}, 404
                 
                 item_dict = dictify_DBItem(retrieved_item)
+                # Or alternatively: item_dict = retrieved_item.__dict__
+                # which should be used instead of my custom function, but need to know what to do with the image.
+                
                 item_json = json.dumps(item_dict)
-                response = item_dict, 200
+                response = item_dict, 200  # a 'request.response' type of object
                 return response
             
         except Exception as err:
             logger.error(str(err))
-            return {"error": str(err)}
+            return {"error": str(err)}, 404
 
     def post(self):
-        """Created a new item"""
+        """Created a new item in DB"""
+
+        # JSON data is submitted in the body of the request (in Postman: body --> raw (json))
+        # request.get_json() knows how to read the json accompanied with the request.
+        
+        new_item = request.get_json()
+        if new_item is None:
+            logger.error("New item's json is empty")
+            return {"error": "Json is empty"}, 204  # 204: No content
+
+        """ We can read further info, for example business_id from the URL query string """
+        """ request.args.get('business_id') according to how we want """
+        
         try:
-            # TODO:  actual logic to be added once Database connector is available
-            return "Item Created", 201 
+            new_item = buildDBItemFromJson(new_item)
+            if new_item is None:
+                return {"error": "New item's json is not valid!"}
+            
+            new_item.add_item()  # DB access
+            return "Success! Item " + str(new_item.name) + " Created.", 201 
         except Exception as err:
+            logger.error(str(err))
+            #  return {"error": str(err)}, 404
             return error_response(err)
 
     def put(self, item_id: str):

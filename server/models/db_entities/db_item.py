@@ -104,7 +104,6 @@ def test_add_item():
     print(new_item.name + "'s price is: " + str(new_item.price) + ", it contains: " + new_item.desc)
     new_item.add_item()
 
-
 def test_get_item(item_id):
     salad = get_item(item_id)
 
