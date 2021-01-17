@@ -51,8 +51,7 @@ def get_item(item_id: int) -> DBItem:
     if(type(item_id) != int):  # MAYBE WE ALSO PREVENT USER FROM INPUTING ANYTHING OTHER THAN A NUMBER (in the  web forms + in the HTTP requests).
         err_msg = "item_id must be int!"
         logger.error(err_msg)
-        # TODO: @Drops - the return here should be removed, or at least return a DBItem somehow. Leaving this here for you.
-        return(err_msg)
+        return(None)
     
     select_query = "SELECT item_id, item_name, item_desc, image, price, business_id FROM Item WHERE item_id=%s"  # This way is called binding params, which is a safe way to prevent a SQL injection attack - because MySQL makes sure the value is of the correct type.
     data = (item_id,) # a comma endicates a Tuple
@@ -63,7 +62,7 @@ def get_item(item_id: int) -> DBItem:
         if(res_item[0] != item_id):
             err_msg = "Item with ID " + str(item_id) + " was not found!"
             logger.error(err_msg)
-            return(err_msg)
+            return(None)
         
         retrieved_item = DBItem(res_item[1], res_item[2], res_item[3], res_item[4], res_item[5], res_item[0]) # Indexes are according to the SELECT statement above.
         return retrieved_item
@@ -71,7 +70,7 @@ def get_item(item_id: int) -> DBItem:
     else:
         err_msg = "Item with ID " + str(item_id) + " was not found!"
         logger.error(err_msg)
-        return(err_msg)
+        return(None)
 
 
 # Returns: list of DBItem instances, or None at failure.
@@ -104,7 +103,6 @@ def test_add_item():
     new_item = DBItem("sala6a", "Tabouli", myimgdata, 32, 1)
     print(new_item.name + "'s price is: " + str(new_item.price) + ", it contains: " + new_item.desc)
     new_item.add_item()
-
 
 def test_get_item(item_id):
     salad = get_item(item_id)

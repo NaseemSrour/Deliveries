@@ -32,8 +32,10 @@ if (APP_MODE == AppMode.DEVELOPEMENT):
         try: 
             os.remove(os.path.join(LOGGING_DIR_ABS, f))
         except Exception as err:
-            logging.warn("Failed to remove old log files...")
-            logging.error(err)
+            #logging.warn("Failed to remove old log files...")
+            #logging.error(err)
+            # @RUDY - Commented those for now cuz they filled the command prompt.
+            pass
 
 
 def get_logfile_name(postfix: str) -> str: 
