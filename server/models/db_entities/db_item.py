@@ -7,15 +7,34 @@ import logging
 
 import database.db_controller as db_controller
 import utils.binary_file_ops as file_ops
+from marshmallow import Schema, fields, post_load
 
 logger = logging.getLogger(__name__)
 
-class DBItem:
-    def __init__(self, itemName: str, itemDesc: str, img: bytes, price: int, business_id: int, itemID: int = None):
-        self.ID = itemID  # auto-generated inside the DB.
-        self.name = itemName
-        self.desc = itemDesc
-        self.image = img
+
+class DBItemSchema(Schema):
+        ID = fields.Integer(allow_none=True)
+        name = fields.Str()
+        desc = fields.Str()
+        image = fields.Str(allow_none=True) ############ For now
+        price = fields.Integer()
+        business_id = fields.Integer()
+
+
+        @post_load
+        def make_db_item(self, data, **kwargs):
+            return DBItem(**data)
+
+
+class DBItem():
+
+    schema = DBItemSchema()
+    
+    def __init__(self, name: str, desc: str, image: bytes, price: int, business_id: int, ID: int = None):
+        self.ID = ID  # auto-generated inside the DB.
+        self.name = name
+        self.desc = desc
+        self.image = image
         self.price = price
         self.business_id = business_id
 
@@ -39,10 +58,20 @@ class DBItem:
         data = (self.ID, self.business_id)
         db_controller.execute_query(delete_statement, data)  # Returns None
         
+    def toJson(self):
+        return(DBItem.schema.dumps(self))
+
+    @classmethod
+    def toObject(cls, jsoned_item):
+        return(cls.schema.loads(jsoned_item))
     
     def __str__(self):
         # Print without the image bytes.
         return str([self.ID, self.name, self.desc, self.price, self.business_id])
+
+    def __repr__(self):
+        # Print without the image bytes.
+        return f"<DBItem(name='{self.name}', desc='{self.desc}', price='{self.price}')>"
 
 
 
@@ -97,6 +126,16 @@ def get_items(businessID: int) -> list[DBItem]:
 # ---------------------------
 
 # Local stam tests:
+
+def test_serialize_item():
+
+    new_item = DBItem("sala6a", "Tabouli", None, 32, 1)
+    my_json = new_item.toJson()
+    print("my json: " + my_json)
+    new_dbitem = DBItem.toObject(my_json)
+    print(repr(new_dbitem))
+    print(new_dbitem.toJson())
+
 def test_add_item():
     myimgdata = file_ops.convertToBinaryData('C:\\Users\\Naseem\\Desktop\\Untitled.png')
 
@@ -121,5 +160,5 @@ def test_get_items(business_id):
 
 # call here these functions to actually view/edit data in the DB.
 
-# test_get_items(1)
+test_serialize_item()
 
