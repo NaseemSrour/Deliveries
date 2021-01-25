@@ -160,5 +160,5 @@ def test_get_items(business_id):
 
 # call here these functions to actually view/edit data in the DB.
 
-test_serialize_item()
+# test_serialize_item()
 
