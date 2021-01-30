@@ -50,7 +50,7 @@ class DBItem():
         # --------- Firestore version:
 
         db = db_firestore_controller.initialize()
-        newly_created_item = db.collection('items').document(self.name).set(self.toJson())
+        newly_created_item = db.collection('items').document(self.name).set(self.toJson()) ### emkn hon lazin t-convert el final json to a dict
 
     def update_item(self):
         # --------- MySQL:
