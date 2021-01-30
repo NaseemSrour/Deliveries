@@ -53,17 +53,23 @@ class DBItem():
         newly_created_item = db.collection('items').document(self.name).set(self.toJson())
 
     def update_item(self):
+        # --------- MySQL:
         '''
         update_query = "UPDATE item SET item_name=%s, item_desc=%s, image=%s, price=%s WHERE item_id=%s AND business_id=%s"
         data = (self.name, self.desc, self.image, self.price, self.ID, self.business_id)
         db_mysql_controller.execute_query(update_query, data)  # returns None
         '''
+        # end of MySQL implementation.
 
         # --------- Firestore:
 
         db = db_firestore_controller.initialize()
-        existing_item_ref = db.collection('items').document(self.name)
-        existing_item_ref.update(self.toJson())
+        print("retrieving ref in DBItem.update...") ##### change these to some logger - THEY ARE IMPORTANT FOR FAST DEBUGGING, UGH!
+        existing_item_ref = db.collection('items').document(self.name)  # Retrieve item's ref
+        print("retrieved the ref") ##### change these to some logger
+        existing_item_ref.update(json.loads(self.toJson()))  # use update(dict) to update the existing item in FireStore.
+        print("updated successfully") ##### change these to some logger
+        # end of Firestore implementation.
 
     def delete_item(self):
         delete_statement = "DELETE FROM item WHERE item_id=%s AND business_id=%s"
