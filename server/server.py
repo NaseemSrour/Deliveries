@@ -15,7 +15,7 @@ logger.debug("Logger is configured!")
 def create_app() -> Flask:
     app = Flask(__name__)
     api = Api(app)
-    api.add_resource(ItemAPI, '/item', '/item/<int:item_id>', endpoint='item_api')  # endpoint shkla esm l resource (file) in lowercase
+    api.add_resource(ItemAPI, '/item', '/item/<string:item_name>', endpoint='item_api')  # endpoint shkla esm l resource (file) in lowercase
     return app 
 
 if __name__ == '__main__':

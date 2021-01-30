@@ -2,23 +2,35 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-# For Firebase JS SDK v7.20.0 and later, measurementId is optional
-firebaseConfig = {
-  "apiKey": "AIzaSyBTLvRG8oknnaRlgr3CWeVlCpQdBAVZ-Zg",
-  "authDomain": "take-me-45367.firebaseapp.com",
-  "projectId": "take-me-45367",
-  "storageBucket": "take-me-45367.appspot.com",
-  "messagingSenderId": "495981408208",
-  "appId": "1:495981408208:web:8d59bd6ad574e6530f93d5",
-  "measurementId": "G-KNXP6CJVZ6"
-}
 
-# Use the environment variable GOOGLE_APPLICATION_CREDENTIALS, which contains my private key.
-# This variable only applies to your current shell session, so if you open a new session, set the variable again.
-firebase_admin.initialize_app()  # Uses the env var above.
+def initialize():
 
-db = firestore.client()
+    # For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    firebaseConfig = {
+      "apiKey": "AIzaSyBTLvRG8oknnaRlgr3CWeVlCpQdBAVZ-Zg",
+      "authDomain": "take-me-45367.firebaseapp.com",
+      "projectId": "take-me-45367",
+      "storageBucket": "take-me-45367.appspot.com",
+      "messagingSenderId": "495981408208",
+      "appId": "1:495981408208:web:8d59bd6ad574e6530f93d5",
+      "measurementId": "G-KNXP6CJVZ6"
+    }
 
+
+    # Use the environment variable GOOGLE_APPLICATION_CREDENTIALS, which contains my private key.
+    # This variable only applies to your current shell session, so if you open a new session, set the variable again.
+    # Read more here: https://firebase.google.com/docs/admin/setup#linux-or-macos
+    try:
+        app = firebase_admin.get_app(name='[DEFAULT]')
+        db = firestore.client()
+        return db
+    except ValueError as e:
+        print("App doesn't exist, create it")
+        firebase_admin.initialize_app()  # Uses the credentials env var above.
+        db = firestore.client()
+        return db
+
+''' Basic examples for reference:
 
 # Add data to database:
 doc_ref = db.collection(u'users').document(u'alovelace')
@@ -44,3 +56,5 @@ docs = users_ref.stream()
 
 for doc in docs:
     print(f'{doc.id} => {doc.to_dict()}')
+
+'''
