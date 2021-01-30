@@ -46,7 +46,8 @@ class DBItem():
         result = db_mysql_controller.execute_query(insert_item_query, data)  # 'result' should be equal to None on success.
         logger.info("Item " + self.name + " added successfully.")
         '''
-        # --------- Firestore:
+
+        # --------- Firestore version:
 
         db = db_firestore_controller.initialize()
         newly_created_item = db.collection('items').document(self.name).set(self.toJson())
