@@ -16,6 +16,7 @@ def create_app() -> Flask:
     app = Flask(__name__)
     api = Api(app)
     api.add_resource(ItemAPI, '/item', '/item/<string:item_name>', endpoint='item_api')  # endpoint shkla esm l resource (file) in lowercase
+    # Maybe make the item_name parameter as a Query String (? =)
     return app 
 
 if __name__ == '__main__':
