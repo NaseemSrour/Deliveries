@@ -25,7 +25,7 @@ def initialize():
         db = firestore.client()
         return db
     except ValueError as e:
-        print("App doesn't exist, create it")
+        print("Firestore App instance doesn't exist, creating it")
         firebase_admin.initialize_app()  # Uses the credentials env var above.
         db = firestore.client()
         return db
