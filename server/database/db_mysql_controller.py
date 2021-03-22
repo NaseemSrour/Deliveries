@@ -7,17 +7,17 @@ import logging
 import mysql.connector
 from mysql.connector import errorcode
 import json
-import db_config
+import db_mysql_config
 
 logger = logging.getLogger(__name__)
 
 # print(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 dbConfig = {
-  'user': db_config.db_username,
-  'password': db_config.db_password,
-  'host': db_config.db_host,
-  'database': db_config.db_name, 'autocommit':True
+  'user': db_mysql_config.db_username,
+  'password': db_mysql_config.db_password,
+  'host': db_mysql_config.db_host,
+  'database': db_mysql_config.db_name, 'autocommit':True
 }
 
 
